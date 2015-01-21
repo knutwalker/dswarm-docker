@@ -1,0 +1,29 @@
+dswarm:
+  build: backend
+  command: java -Dconfig.file=/app/dswarm.conf -jar /app/dswarm.jar
+  links:
+    - meta
+    - graph
+  ports:
+    - "8087:8087"
+  volumes:
+    - data/files:/data/files
+
+meta:
+  image: "mysql:5.5"
+  ports:
+    - "3306:3306"
+  volumes:
+    - /var/lib/mysql
+    - data/mysql:/usr/local/mysql/data
+  environment:
+    MYSQL_ROOT_PASSWORD: root
+
+graph:
+  build: neo4j
+  privileged: true
+  ports:
+    - "7474:7474"
+  volumes:
+    - data/neo4j:/data
+

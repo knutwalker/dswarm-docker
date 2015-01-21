@@ -1,0 +1,9 @@
+- dockerfile for mysql
+- init sql scripts to mysql
+- more neo4j config files
+- change assembly for neo4j to docker dir
+- fix up shading / dep issues 
+- note to custom build of fig
+- front end docker (nginx + copy)
+- graph - use sahade plugin + include provided
+- different fig files for jenkins, etc...
