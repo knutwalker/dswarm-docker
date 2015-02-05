@@ -1,5 +1,5 @@
 dswarm:
-  build: backend
+  image: martinseeler/oracle-server-jre
   command: java -Dconfig.file=/app/dswarm.conf -jar /app/dswarm.jar
   links:
     - meta
@@ -8,6 +8,7 @@ dswarm:
     - "8087:8087"
   volumes:
     - data/files:/data/files
+    - backend:/app
 
 frontend:
   image: nginx:1.7.9
@@ -30,8 +31,10 @@ meta:
     MYSQL_PASSWORD: dmp
 
 graph:
-  build: neo4j
+  image: tpires/neo4j
   ports:
     - "7474:7474"
   volumes:
     - data/neo4j:/data
+    - neo4j/neo4j-server.properties:/var/lib/neo4j/conf/neo4j-server.properties
+    - neo4j/dswarm-graph-assembly.jar:/var/lib/neo4j/plugins/dswarm-graph.jar
